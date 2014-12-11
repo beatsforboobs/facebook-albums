@@ -21,6 +21,7 @@ func main() {
 		cli.StringFlag{"app-id", "", "Facebook app client id", "FACEBOOK_APP_ID"},
 		cli.StringFlag{"app-secret", "", "Facebook app client secret", "FACEBOOK_APP_SECRET"},
 		cli.StringFlag{"redirect-url", "http://localhost:3000/facebook/auth", "OAuth callback endpoint", "FACEBOOK_OAUTH_URL"},
+		cli.StringFlag{"s3-bucket", "", "S3 bucket to save files to", "AWS_S3_BUCKET"},
 	}
 	app.Action = Run
 	app.Run(os.Args)
