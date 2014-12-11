@@ -1,0 +1,6 @@
+package main
+
+func ExportAlbums(accessToken string, finished chan struct{}) {
+	// https://graph.facebook.com/v2.2/beatsforboobs/albums?access_token=...
+	// https://graph.facebook.com/v2.2/10152035682934317/photos?access_token=...
+}
