@@ -1,0 +1,38 @@
+{
+	"ImportPath": "github.com/beatsforboobs/facebook-albums",
+	"GoVersion": "go1.3.1",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/goauth2/oauth",
+			"Comment": "weekly-56",
+			"Rev": "afe77d958c701557ec5dc56f6936fcc194d15520"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-26-gf7ebb76",
+			"Rev": "f7ebb761e83e21225d1d8954fde853bf8edd46c4"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v0.4-8-g3b079bb",
+			"Rev": "3b079bb6f79ae501e73a5401c41b589f6616b61e"
+		},
+		{
+			"ImportPath": "github.com/julienschmidt/httprouter",
+			"Rev": "46807412fe50aaceb73bb57061c2230fd26a1640"
+		},
+		{
+			"ImportPath": "launchpad.net/goamz/aws",
+			"Comment": "49",
+			"Rev": "martin.packman@canonical.com-20140813150539-umttn7s536u85eiz"
+		},
+		{
+			"ImportPath": "launchpad.net/goamz/s3",
+			"Comment": "49",
+			"Rev": "martin.packman@canonical.com-20140813150539-umttn7s536u85eiz"
+		}
+	]
+}

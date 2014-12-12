@@ -1,11 +1,8 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"os"
-	"os/exec"
-	"time"
 
 	"github.com/codegangsta/cli"
 	"github.com/gin-gonic/gin"
@@ -22,33 +19,23 @@ func main() {
 		cli.StringFlag{"app-secret", "", "Facebook app client secret", "FACEBOOK_APP_SECRET"},
 		cli.StringFlag{"redirect-url", "http://localhost:3000/facebook/auth", "OAuth callback endpoint", "FACEBOOK_OAUTH_URL"},
 		cli.StringFlag{"s3-bucket", "", "S3 bucket to save files to", "AWS_S3_BUCKET"},
+		cli.StringFlag{"port", "3000", "port to run on", "PORT"},
 	}
 	app.Action = Run
 	app.Run(os.Args)
 }
 
-func Server(client *OAuthClient) {
-	routes := gin.New()
-	routes.GET("/facebook/auth", client.Authorize)
-
-	http.ListenAndServe(":3000", routes)
-}
-
 func Run(c *cli.Context) {
 	client := NewOAuthClient(c)
 
-	// start the web server
-	go Server(client)
+	routes := gin.New()
+	routes.GET("/facebook/auth", client.Authorize)
+	routes.GET("/facebook/login", func(c *gin.Context) {
+		c.Redirect(302, client.AuthCodeURL("beatsforboobs"))
+	})
+	routes.GET("/", func(c *gin.Context) {
+		c.Redirect(302, "http://beatsforboobs.org")
+	})
 
-	// wait for the server to start
-	<-time.After(250 * time.Millisecond)
-
-	cmd := exec.Command("open", client.AuthCodeURL("facebook-albums"))
-	_, err := cmd.CombinedOutput()
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	// wait for completion
-	<-client.Quit
+	http.ListenAndServe(":"+c.String("port"), routes)
 }
